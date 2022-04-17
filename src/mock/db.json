@@ -1,0 +1,12 @@
+{
+    "bill": [
+        {
+            "id": 1,
+            "thumbnail": "",
+            "image": "",
+            "date": "",
+            "amount": 15.23,
+            "status": 1
+        }
+    ]
+}
