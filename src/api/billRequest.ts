@@ -7,7 +7,7 @@ import { AxiosResponse } from 'axios';
 
 // Get bill page list
 export async function getBillPage(prams: GetBillsPageParms): Promise<ResponseResult<BillsPageProps>> {
-    const url = `${Global.API.PREFIX}/bill?${stringify(prams, { skipNulls: true })}`;
+    const url = `${Global.API.PREFIX}/bills?${stringify(prams, { skipNulls: true })}`;
     return httpRequest.get<ResponseResult<BillsPageProps>>(url).then((res: AxiosResponse<ResponseResult<BillsPageProps>, any>) => {
         return res.data;
     }).catch((err: ResponseResult) => {

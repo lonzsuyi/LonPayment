@@ -1,5 +1,5 @@
 {
-    "bill?currentPage=1&pageSzie=10": {
+    "bills": {
         "code": 200,
         "data": {
             "currentPage": 1,
@@ -85,18 +85,7 @@
                     "date": "2021-03-11 20:22:33",
                     "amount": 7.23,
                     "status": 4
-                }
-            ]
-        },
-        "msg": "success"
-    },
-    "bill?currentPage=2&pageSzie=10": {
-        "code": 200,
-        "data": {
-            "currentPage": 1,
-            "pageSzie": 10,
-            "total": 22,
-            "list": [
+                },
                 {
                     "id": 11,
                     "thumbnail": "https://github.com/lonzsuyi/LonPayment/blob/main/src/mock/image/11.jpeg",
@@ -176,18 +165,7 @@
                     "date": "2022-01-12 01:22:33",
                     "amount": 91.23,
                     "status": 1
-                }
-            ]
-        },
-        "msg": "success"
-    },
-    "bill?currentPage=3&pageSzie=10": {
-        "code": 200,
-        "data": {
-            "currentPage": 1,
-            "pageSzie": 10,
-            "total": 22,
-            "list": [
+                },
                 {
                     "id": 21,
                     "thumbnail": "https://github.com/lonzsuyi/LonPayment/blob/main/src/mock/image/21.webp",

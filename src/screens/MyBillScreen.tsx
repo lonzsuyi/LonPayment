@@ -17,8 +17,9 @@ export default function MyBillScreen({ navigation }: RootDrawerScreenProps<'MyBi
     const [billData, setBillData] = useState([]);
     const _getBillPage = async (params: GetBillsPageParms) => {
         const data: ResponseResult<BillsPageProps> = await getBillPage(params);
+        console.log('bill data', data)
         if (data.code === 200) {
-
+            console.log('bill data', data.data)
         }
     }
 

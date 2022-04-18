@@ -7,11 +7,14 @@ const httpRequest = axios.create()
 
 // Interceptors applies to every ajax call
 httpRequest.interceptors.request.use(
-    function (config: AxiosRequestConfig<any>) {
+    (config: AxiosRequestConfig<any>) => {
+        //  Request info log
+        console.log('Method: ', config.method);
+        console.log('URL: ', config.url);
         // config.headers['Authorization'] = `Bearer ${localStorage.getItem('LonShopToken')}`
         return config
     },
-    function (err) {
+    (err: Error | AxiosError) => {
         return Promise.reject(err)
     }
 )
