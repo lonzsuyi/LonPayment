@@ -157,30 +157,6 @@
                     "date": "2022-02-07 07:22:33",
                     "amount": 20.23,
                     "status": 4
-                },
-                {
-                    "id": 20,
-                    "thumbnail": "https://www.finder.com.au/finder-au/wp-uploads/2020/08/read-bill-front_42034305-3-1.png",
-                    "image": "https://www.finder.com.au/finder-au/wp-uploads/2020/08/read-bill-front_42034305-3-1.png",
-                    "date": "2022-01-12 01:22:33",
-                    "amount": 91.23,
-                    "status": 1
-                },
-                {
-                    "id": 21,
-                    "thumbnail": "https://www.alintaenergy.com.au/-/jssmedia/alinta-website/images/help-and-support/sme-bills/vic-sme-elec-front.jpg?h=1029&iar=0&w=728&rev=dfc17c5bf1d64d7c8dbcd6ddf2ff9d25&hash=EC9E0F3D09D471505CEFBD29D54AF9C8",
-                    "image": "https://www.alintaenergy.com.au/-/jssmedia/alinta-website/images/help-and-support/sme-bills/vic-sme-elec-front.jpg?h=1029&iar=0&w=728&rev=dfc17c5bf1d64d7c8dbcd6ddf2ff9d25&hash=EC9E0F3D09D471505CEFBD29D54AF9C8",
-                    "date": "2022-03-11 06:22:33",
-                    "amount": 55.23,
-                    "status": 2
-                },
-                {
-                    "id": 22,
-                    "thumbnail": "https://www.alintaenergy.com.au/-/jssmedia/alinta-website/documents/bills/19262websitebillexplainercifront.jpg?h=1600&iar=0&w=1131&rev=060e5c6bab6a4257ab49a1d2f61c291f&hash=21CE1ACBFC407529647D88060C4D96AC",
-                    "image": "https://www.alintaenergy.com.au/-/jssmedia/alinta-website/documents/bills/19262websitebillexplainercifront.jpg?h=1600&iar=0&w=1131&rev=060e5c6bab6a4257ab49a1d2f61c291f&hash=21CE1ACBFC407529647D88060C4D96AC",
-                    "date": "2022-04-11 10:22:33",
-                    "amount": 75.23,
-                    "status": 3
                 }
             ]
         },

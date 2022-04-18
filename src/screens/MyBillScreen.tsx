@@ -6,11 +6,13 @@ import dayjs from 'dayjs';
 
 import { RootDrawerScreenProps } from '../types/rootTypes';
 import { Text, View } from '../components/Themed';
+import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
 
 import { GetBillsPageParms, BillsPageProps, BillItemProps, BillStatusEnum } from '../types/billTypes';
 import { ResponseResult } from '../types/httpTypes';
 import { getBillPage } from '../api/billRequest';
+
 
 export default function MyBillScreen({ navigation }: RootDrawerScreenProps<'MyBill'>) {
 
@@ -125,7 +127,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     billScroll: {
-        marginVertical: 15
+        marginVertical: 15,
+        // backgroundColor:Colors.common.tintGray
     },
     billConent: {
 
