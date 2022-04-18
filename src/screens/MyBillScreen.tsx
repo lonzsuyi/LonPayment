@@ -1,11 +1,13 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { StyleSheet, ScrollView, RefreshControl, Image, TouchableOpacity, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
+import { RootDrawerScreenProps } from '../types/rootTypes';
 
 import { Text, View } from '../components/Themed';
 import Layout from '../constants/Layout';
 
-import { RootDrawerScreenProps } from '../types/rootTypes';
-import { BillsProps, BillItemProps, BillStatusEnum } from '../types/BillTypes';
+import { GetBillsPageParms, BillsPageProps, BillItemProps, BillStatusEnum } from '../types/billTypes';
+import { ResponseResult } from '../types/httpTypes';
+import { getBillPage } from '../api/billRequest';
 
 export default function MyBillScreen({ navigation }: RootDrawerScreenProps<'MyBill'>) {
 
@@ -13,6 +15,12 @@ export default function MyBillScreen({ navigation }: RootDrawerScreenProps<'MyBi
     const [currentPage, setCurrentPage] = useState(1);
     const pageSzie = 10;
     const [billData, setBillData] = useState([]);
+    const _getBillPage = async (params: GetBillsPageParms) => {
+        const data: ResponseResult<BillsPageProps> = await getBillPage(params);
+        if (data.code === 200) {
+
+        }
+    }
 
     // refresh
     const [isRefreshing, setIsRefreshing] = useState(false);
@@ -74,6 +82,13 @@ export default function MyBillScreen({ navigation }: RootDrawerScreenProps<'MyBi
             </View>
         )
     }
+
+    /**
+     * Init screen
+     */
+    useEffect(() => {
+        _getBillPage({ currentPage: currentPage, pageSzie: pageSzie })
+    }, [])
 
     return (
         <View style={styles.container}>

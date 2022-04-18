@@ -13,7 +13,9 @@ import Header from '../components/Header';
 
 export default function HomeScreen({ navigation }: RootDrawerScreenProps<'Home'>) {
 
-    /** hook */
+    /**
+     * Init screen
+     */
     // Set header 
     useEffect(() => {
         navigation.setOptions({
