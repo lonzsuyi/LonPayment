@@ -19,7 +19,7 @@ export type BillItemProps = {
     thumbnail: string,
     image: string,
     date: Date,
-    amount: Float64Array,
+    amount: number,
     status: BillStatusEnum
 }
 

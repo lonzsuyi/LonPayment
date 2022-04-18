@@ -1,7 +1,10 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useCallback, useState } from 'react';
 import { StyleSheet, ScrollView, RefreshControl, Image, TouchableOpacity, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
-import { RootDrawerScreenProps } from '../types/rootTypes';
+import AutoHeightImage from 'react-native-auto-height-image';
+import { useFocusEffect } from '@react-navigation/native';
+import dayjs from 'dayjs';
 
+import { RootDrawerScreenProps } from '../types/rootTypes';
 import { Text, View } from '../components/Themed';
 import Layout from '../constants/Layout';
 
@@ -12,19 +15,19 @@ import { getBillPage } from '../api/billRequest';
 export default function MyBillScreen({ navigation }: RootDrawerScreenProps<'MyBill'>) {
 
     // Get Api data
-    const [currentPage, setCurrentPage] = useState(1);
-    const pageSzie = 10;
-    const [billData, setBillData] = useState([]);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const pageSzie: number = 10;
+    const [billsData, setBillsData] = useState<Array<BillItemProps>>([]);
     const _getBillPage = async (params: GetBillsPageParms) => {
         const data: ResponseResult<BillsPageProps> = await getBillPage(params);
-        console.log('bill data', data)
         if (data.code === 200) {
-            console.log('bill data', data.data)
+            setBillsData(data.data.list);
+            console.log(data.data.list)
         }
     }
 
     // refresh
-    const [isRefreshing, setIsRefreshing] = useState(false);
+    const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
     const onRefresh = () => {
 
     }
@@ -41,6 +44,7 @@ export default function MyBillScreen({ navigation }: RootDrawerScreenProps<'MyBi
     /** Render */
     const BillContentRender = (items: Array<BillItemProps>) => {
         const rowCount = 2;
+        const itemWidth = Layout.window.width / 2
         let rows: Array<ReactNode> = [];
 
         for (let i: number = 0; i < items.length; i += rowCount) {
@@ -48,7 +52,7 @@ export default function MyBillScreen({ navigation }: RootDrawerScreenProps<'MyBi
             let colCount: number = i == items.length - 1 ? items.length % rowCount : rowCount;
             for (let j = 0; j < colCount; j++) {
                 cols.push(
-                    <BillItemRender key={j} item={items[i + j]} />
+                    <BillItem key={j} item={items[i + j]} width={itemWidth} />
                 );
             }
             rows.push(
@@ -64,16 +68,19 @@ export default function MyBillScreen({ navigation }: RootDrawerScreenProps<'MyBi
             </View>
         );
     }
-    const BillItemRender = ({ item }: { item: BillItemProps }) => {
+    const BillItem = ({ item, width }: { item: BillItemProps, width: number }) => {
+        const imageWidth = width * 0.8
+
         return (
-            <View>
-                <View></View>
-                <View>
-                    <Text>Water Bill</Text>
+            <View style={{ ...styles.billItem, width: width }}>
+                <View style={styles.itemImagePanel}>
+                    <AutoHeightImage width={imageWidth} source={{ uri: 'https://www.wikihow.com/images/thumb/1/15/Write-a-Bill-for-Payment-Step-1-Version-4.jpg/v4-460px-Write-a-Bill-for-Payment-Step-1-Version-4.jpg.webp' }} />
                 </View>
                 <View>
-                    <Text>2022 March 10:</Text>
-                    <Text>$185</Text>
+                    <Text fontType="comfortaa">{`${dayjs(item.date).format('MMM DD, YYYY')}`}</Text>
+                </View>
+                <View>
+                    <Text>{item.amount}</Text>
                 </View>
                 <View>
                     <TouchableOpacity>
@@ -87,9 +94,10 @@ export default function MyBillScreen({ navigation }: RootDrawerScreenProps<'MyBi
     /**
      * Init screen
      */
-    useEffect(() => {
+    // Switch screen to bill request refresh once each time
+    useFocusEffect(useCallback(() => {
         _getBillPage({ currentPage: currentPage, pageSzie: pageSzie })
-    }, [])
+    }, []));
 
     return (
         <View style={styles.container}>
@@ -101,7 +109,9 @@ export default function MyBillScreen({ navigation }: RootDrawerScreenProps<'MyBi
             }
                 onMomentumScrollEnd={scrollEnd}
             >
-
+                {
+                    BillContentRender(billsData)
+                }
             </ScrollView>
         </View>
     )
@@ -115,12 +125,23 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     billScroll: {
-
+        marginVertical: 15
     },
     billConent: {
 
     },
     billItemRow: {
+        flexDirection: 'row'
+    },
+    billItem: {
+        flexDirection: 'column',
+        alignItems: 'center'
+    },
+    itemImagePanel: {
 
+    },
+    itemImage: {
+        borderRadius: 5,
+        resizeMode: 'cover'
     }
 })

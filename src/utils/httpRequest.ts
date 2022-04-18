@@ -9,8 +9,10 @@ const httpRequest = axios.create()
 httpRequest.interceptors.request.use(
     (config: AxiosRequestConfig<any>) => {
         //  Request info log
+        console.log('========================== Request ==========================');
         console.log('Method: ', config.method);
         console.log('URL: ', config.url);
+        console.log('========================== Response ==========================');
         // config.headers['Authorization'] = `Bearer ${localStorage.getItem('LonShopToken')}`
         return config
     },
