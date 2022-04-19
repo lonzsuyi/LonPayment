@@ -25,9 +25,9 @@ OS due to lack of developer account, temporarily replaced with screenshots.
 
 ![image](https://github.com/lonzsuyi/LonPayment/blob/main/screenshot/IMG_0008.PNG)  
 ![image](https://github.com/lonzsuyi/LonPayment/blob/main/screenshot/IMG_0009.PNG)  
-![image](https://github.com/lonzsuyi/LonPayment/blob/main/screenshot/IMG_00010.PNG)  
-![image](https://github.com/lonzsuyi/LonPayment/blob/main/screenshot/IMG_00011.PNG)  
-![image](https://github.com/lonzsuyi/LonPayment/blob/main/screenshot/IMG_00012.PNG)  
+![image](https://github.com/lonzsuyi/LonPayment/blob/main/screenshot/IMG_0010.PNG)  
+![image](https://github.com/lonzsuyi/LonPayment/blob/main/screenshot/IMG_0011.PNG)  
+![image](https://github.com/lonzsuyi/LonPayment/blob/main/screenshot/IMG_0012.PNG)  
 
 
 ####  CD/CI (processing)
