@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Colors from '../constants/Colors';
 import { View, Text } from '../components/Themed';
@@ -33,12 +34,12 @@ export default function HomeScreen({ navigation }: RootDrawerScreenProps<'Home'>
     }, [])
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <LogoTile iconSize={30} titleSize={28} />
             <View style={styles.welcome}>
                 <Text style={styles.welcomeTxt} fontType="comfortaa">Hi Guys! Welcome.</Text>
             </View>
-        </View>
+        </SafeAreaView>
     )
 }
 

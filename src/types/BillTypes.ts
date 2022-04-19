@@ -24,9 +24,9 @@ export type BillItemProps = {
 }
 
 export enum BillStatusEnum {
-    Processing,
-    Scheduled,
-    UnableToPay,
-    Paid,
-    Undefined
+    Undefined = 0,
+    Processing = 1,
+    Scheduled = 2,
+    UnableToPay = 3,
+    Paid = 4
 }

@@ -1,8 +1,11 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { getHeaderTitle } from '@react-navigation/elements';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Text, View, FontIcon } from './Themed';
+import Colors from '../constants/Colors';
+import Layout from '../constants/Layout';
 
 
 type HeaderProps = {
@@ -26,6 +29,7 @@ type HeaderProps = {
 
 export default function Header(props: HeaderProps) {
 
+    const insets = useSafeAreaInsets(); // Status Bar height.
     const headerShow = props.type === 'headerHidden' ? false : true;
     const headerLeftShow = props.type === 'default' || props.type === 'onlyBackButton' || props.type === 'BackButtonAndTitle' ? true : false;
     const headerTitleShow = props.type === 'default' || props.type === 'BackButtonAndTitle' || props.type === 'TitleAndDrawerMenu' ? true : false;
@@ -33,6 +37,7 @@ export default function Header(props: HeaderProps) {
 
     return (
         <View>
+            <View style={{ height: insets.top }}></View>
             {
                 headerShow ? <View style={{ ...styles.header, ...props.myHeaderStyle }}>
                     {headerLeftShow ? <HeaderLeft {...props} /> : null}
@@ -87,7 +92,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        height: 50,
+        height: Layout.window.headerHieght,
     },
     headerLeftContainer: {
         position: 'absolute',

@@ -1,2 +1,39 @@
-# LonPayment
-Payment demo project
+# LonPayment (Continuous update)
+
+### Mainly used technology and design ideas
+
+1. Typescript; React Native(0.68+ hook)/React-Navigation; Redux(redux toolkit); Jest; [MVVM design patterns)]
+
+# Memo 
+1. Because the analog interface does not support passing parameters and has an upper limit, there are only 19 pieces of data and they are simulated through the interface method.
+2. Image temporarily for Google image link, temporary effect. (The link may fail after a long time).
+3. IOS due to lack of developer account, temporarily replaced with screenshots.
+
+# Current progress 
+
+#### Android
+
+Install package Link:
+https://github.com/lonzsuyi/LonPayment/android/app/release/app-release.apk  
+
+![](https://github.com/lonzsuyi/LonPayment/android/app/release/app-release.apk)  
+
+
+#### IOS
+OS due to lack of developer account, temporarily replaced with screenshots.
+
+
+![image](https://github.com/lonzsuyi/LonPayment/screenshot/IMG_0008.PNG)  
+![image](https://github.com/lonzsuyi/LonPayment/screenshot/IMG_0009.PNG)  
+![image](https://github.com/lonzsuyi/LonPayment/screenshot/IMG_00010.PNG)  
+![image](https://github.com/lonzsuyi/LonPayment/screenshot/IMG_00011.PNG)  
+![image](https://github.com/lonzsuyi/LonPayment/screenshot/IMG_00012.PNG)  
+
+
+####  CD/CI (processing)
+
+# Log 
+
+1. [2022/04/14] - Get technical test questions  
+2. [2022/04/15 - 2022/024/16] - Build skeleton constructio  
+3. [2022/04/17 - 2022/024/19] - functionality and interaction 
