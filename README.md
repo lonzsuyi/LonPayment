@@ -14,20 +14,20 @@
 #### Android
 
 Install package Link:
-https://github.com/lonzsuyi/LonPayment/android/app/release/app-release.apk  
+https://github.com/lonzsuyi/LonPayment/tree/main/android/app/release/app-release.apk  
 
-![](https://github.com/lonzsuyi/LonPayment/android/app/release/app-release.apk)  
+![](https://github.com/lonzsuyi/LonPayment/tree/main/android/app/release/app-release.apk)  
 
 
 #### IOS
 OS due to lack of developer account, temporarily replaced with screenshots.
 
 
-![image](https://github.com/lonzsuyi/LonPayment/screenshot/IMG_0008.PNG)  
-![image](https://github.com/lonzsuyi/LonPayment/screenshot/IMG_0009.PNG)  
-![image](https://github.com/lonzsuyi/LonPayment/screenshot/IMG_00010.PNG)  
-![image](https://github.com/lonzsuyi/LonPayment/screenshot/IMG_00011.PNG)  
-![image](https://github.com/lonzsuyi/LonPayment/screenshot/IMG_00012.PNG)  
+![image](https://github.com/lonzsuyi/LonPayment/blob/main/screenshot/IMG_0008.PNG)  
+![image](https://github.com/lonzsuyi/LonPayment/blob/main/screenshot/IMG_0009.PNG)  
+![image](https://github.com/lonzsuyi/LonPayment/blob/main/screenshot/IMG_00010.PNG)  
+![image](https://github.com/lonzsuyi/LonPayment/blob/main/screenshot/IMG_00011.PNG)  
+![image](https://github.com/lonzsuyi/LonPayment/blob/main/screenshot/IMG_00012.PNG)  
 
 
 ####  CD/CI (processing)
