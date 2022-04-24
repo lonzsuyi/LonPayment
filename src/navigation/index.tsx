@@ -6,7 +6,6 @@ import * as React from 'react';
 import { ColorSchemeName } from 'react-native';
 
 import Header from '../components/Header';
-import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import HomeScreen from '../screens/HomeScreen';
 import MyBillScreen from '../screens/MyBillScreen';
@@ -31,16 +30,13 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="Root" component={DrawerNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group>
     </Stack.Navigator>
   );
 }
 
 const Drawer = createDrawerNavigator<RootDrawerParamList>();
 
-function DrawerNavigator() {
+export function DrawerNavigator() {
   return (
     <Drawer.Navigator
       initialRouteName="Home"

@@ -6,7 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Colors from '../constants/Colors';
 import { View, Text } from '../components/Themed';
 import { RootDrawerScreenProps } from '../types/rootTypes';
-import LogoTile from '../components/LogoTile';
+import LogoTile from '../components/LogoTitle';
 
 
 import Header from '../components/Header';

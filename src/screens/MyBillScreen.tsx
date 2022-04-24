@@ -106,71 +106,6 @@ export default function MyBillScreen({ navigation }: RootDrawerScreenProps<'MyBi
         );
     }
 
-    const BillItem = ({ item, width, height }: { item: BillItemProps, width: number, height: number }) => {
-
-        const imageWidth: number = width - 20;
-        const imagePanelHeight: number = height * 0.55;
-        const imageHeight: number = imagePanelHeight;
-        const modalContentHeight: number = Layout.window.height * 0.8;
-        const modalImageWidth: number = Layout.window.width * 0.9;
-        const modalImageHeight: number = modalContentHeight - 20;
-        const [imageVisible, setImageVisible] = useState<boolean>(false);
-        const statusName: string = BillStatusEnum[item.status];
-        const statusDesc: any = {
-            Processing: `This bill is currently in processing, it can take approx. 1-2 hours depending on the time of day. `,
-            Scheduled: `This bill is scheduled to be paid and will be paid on the due date, you're in good hands!, etc.`,
-            UnableToPay: ``,
-            Paid: ``,
-            Undefined: ``
-        }
-        const descTxt = statusDesc[statusName];
-
-        const toggleModal = () => {
-            setImageVisible(!imageVisible);
-        };
-
-        return (
-            <View style={{ ...styles.billItem, width: width }}>
-                <View style={{ ...styles.itemImagePanel, height: imagePanelHeight }}>
-                    <TouchableOpacity onPress={toggleModal}>
-                        <AutoHeightImage width={imageWidth} maxHeight={imageHeight} source={{ uri: item.thumbnail }} />
-                    </TouchableOpacity>
-                    <Modal isVisible={imageVisible}>
-                        <View style={{ ...styles.modalImageContent, height: modalContentHeight }}>
-                            <View style={styles.modalImagePanel}>
-                                <AutoHeightImage width={modalImageWidth} maxHeight={modalImageHeight} source={{ uri: item.image }}></AutoHeightImage>
-                            </View>
-                            <View style={styles.modalImageBtnPanel}>
-                                <Button name="Close" type="primary" onPress={toggleModal} />
-                            </View>
-                        </View>
-                    </Modal>
-                </View>
-                <View style={styles.statusPanel}>
-                    <Text style={styles.statusTxt} fontType="comfortaaBold">{`${statusName}`}</Text>
-                    {
-                        descTxt ? (<Popover
-                            from={(
-                                <TouchableOpacity>
-                                    <FontIcon name="question-circle" size={18} />
-                                </TouchableOpacity>
-                            )}>
-                            <View style={styles.popoverContent}><Text>{`${descTxt}`}</Text></View>
-                        </Popover>) : null
-                    }
-
-                </View>
-                <View style={styles.dateAndAmount}>
-                    <Text fontType="comfortaa">{`${dayjs(item.date).format('MMM DD, YYYY')} : `}</Text>
-                    <Text fontType="comfortaaBold">{`$${item.amount}`}</Text>
-                </View>
-                <View style={styles.buttonPanel}>
-                    <Button name="Pay Now" type={item.status === BillStatusEnum.Processing ? 'primary' : 'normal'} />
-                </View>
-            </View>
-        )
-    }
-
     /**
      * Init screen
      */
@@ -181,8 +116,8 @@ export default function MyBillScreen({ navigation }: RootDrawerScreenProps<'MyBi
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={{ ...styles.scrollContainer, height: Layout.window.height - Layout.window.headerHieght - insets.top - insets.bottom, marginTop: -insets.bottom + Layout.window.iosHeightOffest }}>
-                <ScrollView style={styles.billScroll} showsVerticalScrollIndicator={false} refreshControl={
+            <View testID="BillList" style={{ ...styles.scrollContainer, height: Layout.window.height - Layout.window.headerHieght - insets.top - insets.bottom, marginTop: -insets.bottom + Layout.window.iosHeightOffest }}>
+                <ScrollView testID="Scroll" style={styles.billScroll} showsVerticalScrollIndicator={false} refreshControl={
                     <RefreshControl
                         refreshing={isRefreshing}
                         onRefresh={() => onRefresh()}
@@ -196,6 +131,72 @@ export default function MyBillScreen({ navigation }: RootDrawerScreenProps<'MyBi
                 </ScrollView>
             </View>
         </SafeAreaView>
+    )
+}
+
+
+export const BillItem = ({ item, width, height }: { item: BillItemProps, width: number, height: number }) => {
+
+    const imageWidth: number = width - 20;
+    const imagePanelHeight: number = height * 0.55;
+    const imageHeight: number = imagePanelHeight;
+    const modalContentHeight: number = Layout.window.height * 0.8;
+    const modalImageWidth: number = Layout.window.width * 0.9;
+    const modalImageHeight: number = modalContentHeight - 20;
+    const [imageVisible, setImageVisible] = useState<boolean>(false);
+    const statusName: string = BillStatusEnum[item.status];
+    const statusDesc: any = {
+        Processing: `This bill is currently in processing, it can take approx. 1-2 hours depending on the time of day. `,
+        Scheduled: `This bill is scheduled to be paid and will be paid on the due date, you're in good hands!, etc.`,
+        UnableToPay: ``,
+        Paid: ``,
+        Undefined: ``
+    }
+    const descTxt = statusDesc[statusName];
+
+    const toggleModal = () => {
+        setImageVisible(!imageVisible);
+    };
+
+    return (
+        <View style={{ ...styles.billItem, width: width }}>
+            <View style={{ ...styles.itemImagePanel, height: imagePanelHeight }}>
+                <TouchableOpacity testID="OnpenImage" onPress={toggleModal}>
+                    <AutoHeightImage width={imageWidth} maxHeight={imageHeight} source={{ uri: item.thumbnail }} />
+                </TouchableOpacity>
+                <Modal isVisible={imageVisible}>
+                    <View style={{ ...styles.modalImageContent, height: modalContentHeight }}>
+                        <View style={styles.modalImagePanel}>
+                            <AutoHeightImage width={modalImageWidth} maxHeight={modalImageHeight} source={{ uri: item.image }}></AutoHeightImage>
+                        </View>
+                        <View style={styles.modalImageBtnPanel}>
+                            <Button testID="CloseImage" name="Close" type="primary" onPress={toggleModal} />
+                        </View>
+                    </View>
+                </Modal>
+            </View>
+            <View style={styles.statusPanel}>
+                <Text style={styles.statusTxt} fontType="comfortaaBold">{`${statusName}`}</Text>
+                {
+                    descTxt ? (<Popover
+                        from={(
+                            <TouchableOpacity testID="Popover">
+                                <FontIcon name="question-circle" size={18} />
+                            </TouchableOpacity>
+                        )}>
+                        <View style={styles.popoverContent}><Text>{`${descTxt}`}</Text></View>
+                    </Popover>) : null
+                }
+
+            </View>
+            <View style={styles.dateAndAmount}>
+                <Text fontType="comfortaa">{`${dayjs(item.date).format('MMM DD, YYYY')} : `}</Text>
+                <Text fontType="comfortaaBold">{`$${item.amount}`}</Text>
+            </View>
+            <View style={styles.buttonPanel}>
+                <Button name="Pay Now" type={item.status === BillStatusEnum.Processing ? 'primary' : 'normal'} />
+            </View>
+        </View>
     )
 }
 

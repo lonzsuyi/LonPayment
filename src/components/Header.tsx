@@ -52,7 +52,7 @@ export default function Header(props: HeaderProps) {
 function HeaderLeft(props: HeaderProps) {
     return (
         <View style={{ ...styles.headerLeftContainer, ...props.myHeaderLeftStyle }}>
-            <TouchableOpacity onPress={() => {
+            <TouchableOpacity testID="HeaderBack" onPress={() => {
                 props.navigation && props.navigation.goBack && props.navigation.goBack();
             }}>
                 <FontIcon name="chevron-left" size={20} style={{ ...styles.headerLeft, ...props.myHeaderLeftTxtStyle }} />
@@ -77,7 +77,7 @@ function Title(props: HeaderProps) {
 function HeaderRight(props: HeaderProps) {
     return (
         <View style={{ ...styles.headerRightContainer, ...props.myHeaderRightStyle }}>
-            <TouchableOpacity onPress={() => {
+            <TouchableOpacity testID="HeaderMenu" onPress={() => {
                 props.openDrawer && props.openDrawer();
             }}>
                 <FontIcon name="bars" size={20} style={styles.headerRight} />
