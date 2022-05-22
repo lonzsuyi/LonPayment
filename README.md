@@ -8,6 +8,7 @@
 1. Because the analog interface does not support passing parameters and has an upper limit, there are only 19 pieces of data and they are simulated through the interface method.
 2. Image temporarily for Google image link, temporary effect. (The link may fail after a long time).
 3. IOS due to lack of developer account, temporarily replaced with screenshots.
+4. Unit Test are writing.
 
 # Current progress 
 
