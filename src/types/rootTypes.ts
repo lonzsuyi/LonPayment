@@ -22,6 +22,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 export type RootDrawerParamList = {
   Home: undefined;
   MyBill: undefined;
+  Login: undefined;
 }
 
 export type RootDrawerScreenProps<Screen extends keyof RootDrawerParamList> = CompositeScreenProps<

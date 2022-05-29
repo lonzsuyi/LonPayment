@@ -2,7 +2,7 @@
 
 ### Mainly used technology and design ideas
 
-1. Typescript; React Native(0.68+ hook)/React-Navigation; Redux(redux toolkit); Jest; [MVVM design patterns)]
+1. Typescript; React Native(0.68+ hook)/React-Navigation; Redux(redux toolkit); Jest; Realm React ; [MVVM design patterns)]
 
 # Memo 
 1. Because the analog interface does not support passing parameters and has an upper limit, there are only 19 pieces of data and they are simulated through the interface method.
@@ -38,3 +38,4 @@ OS due to lack of developer account, temporarily replaced with screenshots.
 1. [2022/04/14] - Get technical test questions  
 2. [2022/04/15 - 2022/024/16] - Build skeleton constructio  
 3. [2022/04/17 - 2022/024/19] - functionality and interaction 
+4. [2022/05/25]-[2022/05/29] - Read and understand realm related documents, and configure realm cloud server and binding code

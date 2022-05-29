@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useCallback, useState } from 'react';
+import React, { ReactNode, useEffect, useCallback, useState, useMemo } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, ScrollView, RefreshControl, TouchableOpacity, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
@@ -13,9 +13,11 @@ import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
 
 import { GetBillsPageParms, BillsPageProps, BillItemProps, BillStatusEnum } from '../types/billTypes';
+
 import { ResponseResult } from '../types/httpTypes';
 import { getBillPage } from '../api/billRequest';
-
+import { LonPaymentRealmContext } from '../models';
+import { Bill } from '../models/Bill';
 
 export default function MyBillScreen({ navigation }: RootDrawerScreenProps<'MyBill'>) {
     /**
@@ -32,34 +34,51 @@ export default function MyBillScreen({ navigation }: RootDrawerScreenProps<'MyBi
     const [total, setTotal] = useState<number>(0);
     const pageSzie: number = 10;
     const [billsData, setBillsData] = useState<Array<BillItemProps>>([]);
-    const _getBillPage = async (params: GetBillsPageParms) => {
-        if (isRefreshing) {
-            return;
-        }
 
-        const data: ResponseResult<BillsPageProps> = await getBillPage(params);
-        if (data.code === 200) {
-            setTotal(data.data.total);
-            if (params.currentPage === 1) {
-                setBillsData(data.data.list);
-                setCurrentPage(params.currentPage);
-            } else {
-                if (params.currentPage <= Math.ceil(total / params.pageSzie)) {
-                    console.log(...data.data.list)
-                    setBillsData([...billsData, ...data.data.list])
-                    setCurrentPage(params.currentPage);
-                }
-            }
-        }
+    // Use API request
+    // const _getBillPage = async (params: GetBillsPageParms) => {
+    //     if (isRefreshing) {
+    //         return;
+    //     }
 
-        setIsRefreshing(false);
-    }
+    //     const data: ResponseResult<BillsPageProps> = await getBillPage(params);
+    //     if (data.code === 200) {
+    //         setTotal(data.data.total);
+    //         if (params.currentPage === 1) {
+    //             setBillsData(data.data.list);
+    //             setCurrentPage(params.currentPage);
+    //         } else {
+    //             if (params.currentPage <= Math.ceil(total / params.pageSzie)) {
+    //                 setBillsData([...billsData, ...data.data.list])
+    //                 setCurrentPage(params.currentPage);
+    //             }
+    //         }
+    //     }
+
+    //     setIsRefreshing(false);
+    // }
+
+    // Use Realm
+
+    const { useQuery, useRealm } = LonPaymentRealmContext;
+    const realm = useRealm();
+    const result = useQuery(Bill);
+    const bills: any = useMemo(() => result.sorted('date'), [result]);
+
+    useEffect(() => {
+        realm.subscriptions.update(mutableSubs => {
+            mutableSubs.add(realm.objects('Bill'));
+        });
+    }, [realm, result]);
 
     // Refresh
     const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
     const onRefresh = () => {
         setIsRefreshing(true);
-        _getBillPage({ currentPage: 1, pageSzie: pageSzie });
+        setTimeout(() => {
+            setIsRefreshing(false);
+        }, 2000);
+        // _getBillPage({ currentPage: 1, pageSzie: pageSzie });
     }
     // Scroll end loading
     const scrollEnd = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -67,8 +86,8 @@ export default function MyBillScreen({ navigation }: RootDrawerScreenProps<'MyBi
         let contentSizeHeight = event.nativeEvent.contentSize.height; //scrollView contentSize
         let oriageScrollHeight = event.nativeEvent.layoutMeasurement.height;
         if (offsetY + oriageScrollHeight >= contentSizeHeight) {
-            setIsRefreshing(true);
-            _getBillPage({ currentPage: currentPage + 1, pageSzie: pageSzie });
+            // setIsRefreshing(true);
+            // _getBillPage({ currentPage: currentPage + 1, pageSzie: pageSzie });
         }
     }
 
@@ -110,9 +129,9 @@ export default function MyBillScreen({ navigation }: RootDrawerScreenProps<'MyBi
      * Init screen
      */
     // Switch screen to bill request refresh once each time
-    useFocusEffect(useCallback(() => {
-        _getBillPage({ currentPage: currentPage, pageSzie: pageSzie })
-    }, []));
+    // useFocusEffect(useCallback(() => {
+    //     _getBillPage({ currentPage: currentPage, pageSzie: pageSzie })
+    // }, []));
 
     return (
         <SafeAreaView style={styles.container}>
@@ -126,14 +145,13 @@ export default function MyBillScreen({ navigation }: RootDrawerScreenProps<'MyBi
                     onMomentumScrollEnd={scrollEnd}
                 >
                     {
-                        BillContentRender(billsData)
+                        BillContentRender(bills)
                     }
                 </ScrollView>
             </View>
         </SafeAreaView>
     )
 }
-
 
 export const BillItem = ({ item, width, height }: { item: BillItemProps, width: number, height: number }) => {
 

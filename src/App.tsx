@@ -8,7 +8,7 @@ export default function App() {
   const colorScheme = useColorScheme();
   return (
     <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
+      <Navigation colorScheme={colorScheme} />
     </SafeAreaProvider>
   );
 }

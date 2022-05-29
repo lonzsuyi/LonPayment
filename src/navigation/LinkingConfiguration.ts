@@ -24,6 +24,11 @@ const linking: LinkingOptions<RootStackParamList> = {
               MyBillScreen: 'mybill',
             },
           },
+          Login: {
+            screens: {
+              LoginScreen: 'login'
+            }
+          }
         },
       },
       Modal: 'modal',
