@@ -18,6 +18,7 @@ import { ResponseResult } from '../types/httpTypes';
 import { getBillPage } from '../api/billRequest';
 import { LonPaymentRealmContext } from '../models';
 import { Bill } from '../models/Bill';
+import { SYNC_CONFIG } from '../../sync.config';
 
 export default function MyBillScreen({ navigation }: RootDrawerScreenProps<'MyBill'>) {
     /**
@@ -61,15 +62,18 @@ export default function MyBillScreen({ navigation }: RootDrawerScreenProps<'MyBi
     // Use Realm
 
     const { useQuery, useRealm } = LonPaymentRealmContext;
-    const realm = useRealm();
+
     const result = useQuery(Bill);
     const bills: any = useMemo(() => result.sorted('date'), [result]);
 
-    useEffect(() => {
-        realm.subscriptions.update(mutableSubs => {
-            mutableSubs.add(realm.objects('Bill'));
-        });
-    }, [realm, result]);
+    if (SYNC_CONFIG.enabled) {
+        const realm = useRealm();
+        useEffect(() => {
+            realm.subscriptions.update(mutableSubs => {
+                mutableSubs.add(realm.objects('Bill'));
+            });
+        }, [realm, result]);
+    }
 
     // Refresh
     const [isRefreshing, setIsRefreshing] = useState<boolean>(false);

@@ -69,7 +69,7 @@ export function DrawerNavigator() {
   ];
 
   // Judge login some menu 
-  return !user || !app.currentUser ? (
+  return !user || !app.currentUser || !SYNC_CONFIG.enabled ? (
     <Drawer.Navigator
       initialRouteName="Home"
       screenOptions={{
