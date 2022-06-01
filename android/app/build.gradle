@@ -83,6 +83,7 @@ project.ext.react = [
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
+apply plugin: "fullstory"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -127,6 +128,11 @@ def enableHermes = project.ext.react.get("enableHermes", false);
 def reactNativeArchitectures() {
     def value = project.getProperties().get("reactNativeArchitectures")
     return value ? value.split(",") : ["armeabi-v7a", "x86", "x86_64", "arm64-v8a"]
+}
+
+fullstory {
+    org "o-1ANKV8-na1"
+    enabledVariants "release"
 }
 
 android {

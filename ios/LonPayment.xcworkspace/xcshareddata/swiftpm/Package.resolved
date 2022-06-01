@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "FullStory",
+        "repositoryURL": "https://github.com/fullstorydev/fullstory-swift-package-ios",
+        "state": {
+          "branch": null,
+          "revision": "0fe73ea278031413f1c421ecdc72a524c4343dd6",
+          "version": "1.27.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

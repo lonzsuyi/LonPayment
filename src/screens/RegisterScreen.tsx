@@ -1,31 +1,31 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React, { useState, useCallback } from 'react';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet } from 'react-native';
 
 import { RootDrawerScreenProps } from '../types/rootTypes';
+import { Button, Text, TextInput, View } from '../components/Themed';
+
 import { AuthState } from '../types/authTypes';
 import Colors from '../constants/Colors';
-import { Text, View, TextInput, Button } from '../components/Themed';
 
-
-type LoginScreenProps = RootDrawerScreenProps<'Login'> & {
-    onLogin: (email: string, password: string) => void;
+type RegisterScreenProps = RootDrawerScreenProps<'Register'> & {
+    onRegister: (email: string, password: string) => void;
     authState: AuthState;
 }
 
-export default function LoginScreen({ navigation, onLogin, authState }: LoginScreenProps) {
+export default function RegisterScreen({ navigation, onRegister, authState }: RegisterScreenProps) {
 
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
-    const handleLogin = useCallback(() => {
-        onLogin(email, password);
-    }, [onLogin, email, password]);
+    const handleRegister = useCallback(() => {
+        onRegister(email, password);
+    }, [onRegister, email, password]);
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.loginTitle}>
-                <Text style={styles.loginTitleTxt} fontType="comfortaaBold">Login Your Account</Text>
+            <View style={styles.registerTitle}>
+                <Text style={styles.registerTitleTxt} fontType="comfortaaBold">Create an account</Text>
             </View>
             <View style={styles.inputPanel}>
                 <TextInput
@@ -51,7 +51,7 @@ export default function LoginScreen({ navigation, onLogin, authState }: LoginScr
                 />
             </View>
             <View>
-                <Button style={styles.loginAndRegisterBtn} width={300} name="Login" type="bgYAndTxtB" shape="rectangle" onPress={handleLogin} />
+                <Button style={styles.loginAndRegisterBtn} width={300} name="Register" type="bgYAndTxtB" shape="rectangle" onPress={handleRegister} />
             </View>
         </SafeAreaView>
     )
@@ -64,11 +64,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    loginTitle: {
-        marginBottom: 100,
+    registerTitle: {
+        marginBottom: 50,
         backgroundColor: Colors.common.tintGray
     },
-    loginTitleTxt: {
+    registerTitleTxt: {
         fontSize: 28,
     },
     inputPanel: {

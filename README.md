@@ -9,6 +9,8 @@
 2. Image temporarily for Google image link, temporary effect. (The link may fail after a long time).
 3. IOS due to lack of developer account, temporarily replaced with screenshots.
 4. Unit Test are writing.
+5. New feature use Realm replace api call.
+6. All Fulltory plugin. （Looking for the reason why the data was not captured.)
 
 # Current progress 
 
@@ -39,3 +41,4 @@ OS due to lack of developer account, temporarily replaced with screenshots.
 2. [2022/04/15 - 2022/024/16] - Build skeleton constructio  
 3. [2022/04/17 - 2022/024/19] - functionality and interaction 
 4. [2022/05/25]-[2022/05/29] - Read and understand realm related documents, and configure realm cloud server and binding code
+5. [2022/05/30]-[2022/06/02] - Add Fullstory Mobile plugin and config data.

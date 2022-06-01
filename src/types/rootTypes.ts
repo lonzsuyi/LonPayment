@@ -23,6 +23,8 @@ export type RootDrawerParamList = {
   Home: undefined;
   MyBill: undefined;
   Login: undefined;
+  Register: undefined;
+  HelpCenter: undefined;
 }
 
 export type RootDrawerScreenProps<Screen extends keyof RootDrawerParamList> = CompositeScreenProps<

@@ -9,6 +9,7 @@ import dayjs from 'dayjs';
 
 import { RootDrawerScreenProps } from '../types/rootTypes';
 import { Text, View, Button, FontIcon } from '../components/Themed';
+import CountDown from '../components/CountDown';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
 
@@ -214,6 +215,9 @@ export const BillItem = ({ item, width, height }: { item: BillItemProps, width: 
             <View style={styles.dateAndAmount}>
                 <Text fontType="comfortaa">{`${dayjs(item.date).format('MMM DD, YYYY')} : `}</Text>
                 <Text fontType="comfortaaBold">{`$${item.amount}`}</Text>
+            </View>
+            <View>
+                <CountDown date={item.date} timeInterval={1000} />
             </View>
             <View style={styles.buttonPanel}>
                 <Button name="Pay Now" type={item.status === BillStatusEnum.Processing ? 'primary' : 'normal'} />

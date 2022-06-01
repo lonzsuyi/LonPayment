@@ -31,6 +31,7 @@
 		EF57ED06B93346A9B8C019A5 /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B7757F6848884B7A95CFEC84 /* Roboto-MediumItalic.ttf */; };
 		F572BF9165F84EB1BFDED84E /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 713B254EDBBD41039841AC37 /* Roboto-Bold.ttf */; };
 		F644FB28627747F6AFE5AA6F /* Comfortaa-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2511098B90804C7C8E5CD698 /* Comfortaa-SemiBold.ttf */; };
+		FEC469722846544900ACB25E /* FullStory in Frameworks */ = {isa = PBXBuildFile; productRef = FEC469712846544900ACB25E /* FullStory */; };
 		FFC965AFB4CF483A847888B5 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C03400D94994C64A38135E3 /* Roboto-Medium.ttf */; };
 /* End PBXBuildFile section */
 
@@ -112,6 +113,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C80B921A6F3F58F76C31292 /* libPods-LonPayment.a in Frameworks */,
+				FEC469722846544900ACB25E /* FullStory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,12 +280,16 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
 				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				FEC469742846547F00ACB25E /* Run FullStory Asset Uploader */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = LonPayment;
+			packageProductDependencies = (
+				FEC469712846544900ACB25E /* FullStory */,
+			);
 			productName = LonPayment;
 			productReference = 13B07F961A680F5B00A75B9A /* LonPayment.app */;
 			productType = "com.apple.product-type.application";
@@ -314,6 +320,9 @@
 				Base,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
+			packageReferences = (
+				FEC469702846544900ACB25E /* XCRemoteSwiftPackageReference "fullstory-swift-package-ios" */,
+			);
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -506,6 +515,24 @@
 			shellPath = /bin/sh;
 			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		FEC469742846547F00ACB25E /* Run FullStory Asset Uploader */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run FullStory Asset Uploader";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -d \"${BUILD_DIR%Build/*}/SourcePackages/artifacts/FullStory/\" ]\nthen\n  # XCode 13.2 and older\n  \"${BUILD_DIR%Build/*}/SourcePackages/artifacts/FullStory/tools/FullStoryCommandLine\" \"${CONFIGURATION_BUILD_DIR}/${WRAPPER_NAME}\"\nelif [ -d \"${BUILD_DIR%Build/*}/SourcePackages/artifacts/fullstory-swift-package-ios/\" ]\nthen\n  # XCode 13.3+\n  \"${BUILD_DIR%Build/*}/SourcePackages/artifacts/fullstory-swift-package-ios/tools/FullStoryCommandLine\" \"${CONFIGURATION_BUILD_DIR}/${WRAPPER_NAME}\"\nelse \n  echo \"Error: Unable to find FullStoryCommandLine. Please contact support@fullstory.com for assistance.\"\n  exit 127\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -805,6 +832,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FEC469702846544900ACB25E /* XCRemoteSwiftPackageReference "fullstory-swift-package-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fullstorydev/fullstory-swift-package-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FEC469712846544900ACB25E /* FullStory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FEC469702846544900ACB25E /* XCRemoteSwiftPackageReference "fullstory-swift-package-ios" */;
+			productName = FullStory;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
 }

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text as DefaultText, View as DefaultView, TouchableOpacity } from 'react-native';
+import { Text as DefaultText, View as DefaultView, TextInput as DefaultTextInput, TouchableOpacity } from 'react-native';
+import { color } from 'react-native-reanimated';
 import DefaultFontIcon from 'react-native-vector-icons/FontAwesome';
 
 import Colors from '../constants/Colors';
@@ -23,9 +24,6 @@ type ThemeProps = {
   lightColor?: string;
   darkColor?: string;
 };
-
-
-
 
 
 export type TextProps = ThemeProps & DefaultText['props'] & {
@@ -60,9 +58,11 @@ export function FontIcon(props: FontIconProps) {
   return <DefaultFontIcon color={color} {...otherProps} />
 }
 
-export type Button = ThemeProps & TouchableOpacity['props'] & {
+export type Button = ThemeProps & (TouchableOpacity['props'] | DefaultView['props'] | DefaultText['props']) & {
+  width?: number,
   name?: string,
-  type?: 'primary' | 'normal'
+  shape?: 'circle' | 'rectangle'
+  type?: 'primary' | 'normal' | 'bgYAndTxtW' | 'bgWAndTxtB' | 'bgYAndTxtB'
 }
 export function Button(props: Button) {
   const { style, lightColor, darkColor, ...otherProps } = props;
@@ -70,7 +70,7 @@ export function Button(props: Button) {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
 
   const baseStyle = {
-    borderRadius: 50,
+    borderRadius: props.shape && props.shape === 'rectangle' ? 5 : 50,
     paddingHorizontal: 10,
     paddingVertical: 5
   }
@@ -86,15 +86,56 @@ export function Button(props: Button) {
       borderColor: color,
       color: color,
       backgroundColor
+    },
+    bgYAndTxtW: {
+      ...baseStyle,
+      borderWidth: 1,
+      borderColor: Colors.common.white,
+      color: Colors.common.white,
+      backgroundColor: Colors.common.primaryYellow
+    },
+    bgWAndTxtB: {
+      ...baseStyle,
+      borderWidth: 1,
+      borderColor: Colors.common.white,
+      color: Colors.common.primaryBlack,
+      backgroundColor: Colors.common.white,
+    },
+    bgYAndTxtB: {
+      ...baseStyle,
+      borderWidth: 1,
+      borderColor: Colors.common.primaryYellow,
+      color: Colors.common.primaryBlack,
+      backgroundColor: Colors.common.primaryYellow,
     }
   };
   const customStyles = props.type ? stylesObj[props.type] : stylesObj['normal'];
-  
+
   return (
     <TouchableOpacity {...props}>
-      <DefaultView style={[customStyles, style]} {...otherProps}>
-        <DefaultText type="comfortaaBold" style={[customStyles, { borderWidth: 0, textAlign: 'center' }, style]} {...otherProps}>{props.name}</DefaultText>
+      <DefaultView style={[customStyles, { width: props.width }, style]} {...otherProps}>
+        <Text fontType='comfortaaBold' style={[customStyles, { borderWidth: 0, textAlign: 'center' }, style]} {...otherProps}>{props.name}</Text>
       </DefaultView>
     </TouchableOpacity>
   )
+}
+
+export type TextInput = ThemeProps & DefaultTextInput['props'] & {
+  width?: number,
+}
+export function TextInput(props: TextInput) {
+  const { style, lightColor, darkColor, ...otherProps } = props;
+
+  return <DefaultTextInput style={[{
+    width: props.width,
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: Colors.common.primaryYellow,
+    color: Colors.common.primaryBlack,
+    fontSize: 16,
+    fontWeight: 'bold',
+    fontFamily: 'Comfortaa-Bold',
+    paddingHorizontal: 10,
+    paddingVertical: 15
+  }, style]} {...otherProps} />
 }

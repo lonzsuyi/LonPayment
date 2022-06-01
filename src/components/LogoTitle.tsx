@@ -16,7 +16,7 @@ export default function LogoTile(props: LogoTileProps) {
                 <FontIcon style={styles.moneyIcon} name="money" size={props.iconSize} />
                 <FontIcon style={styles.handIcon} name="hand-lizard-o" size={props.iconSize} />
             </View>
-            <Text style={styles.loginName} fontType="comfortaaBold">LonPay</Text>
+            <Text style={styles.logoName} fontType="comfortaaBold">LonPay</Text>
         </View>
     )
 }
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
             { rotate: '-45deg' }
         ]
     },
-    loginName: {
+    logoName: {
         marginLeft: 15,
         fontSize: 28,
         color: Colors.common.white

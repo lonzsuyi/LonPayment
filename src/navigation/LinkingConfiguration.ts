@@ -28,6 +28,16 @@ const linking: LinkingOptions<RootStackParamList> = {
             screens: {
               LoginScreen: 'login'
             }
+          },
+          Register: {
+            screens: {
+              RegisterScreen: 'register'
+            }
+          },
+          HelpCenter: {
+            screens: {
+              HelpCenterScreen: 'helpcenter'
+            }
           }
         },
       },
